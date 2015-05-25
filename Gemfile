@@ -46,4 +46,5 @@ end
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'less-rails'
 gem 'devise'
+gem 'cancancan'
 gem 'devise-bootstrap-views', :git => 'git://github.com/hisea/devise-bootstrap-views.git'
