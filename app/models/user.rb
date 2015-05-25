@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
 
   enum role: {super_admin: 'super_admin', admin: 'admin', member: 'member'}
 
+  validates :name, presence: true
+
 end

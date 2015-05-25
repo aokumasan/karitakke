@@ -1,2 +1,54 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="jumbotron">
+  <h2>図書管理システム<h2>
+  <center>
+  <h1>karitakke</h1>
+    </center>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+    <center>
+    <h3>本の貸出</h3>
+    <%= link_to "貸出", new_rental_path, class: "btn btn-primary btn-lg" %>
+    </center>
+  </div>
+
+  <div class="col-sm-4">
+    <center>
+    <h3>本の返却</h3>
+    <%= link_to "返却", rentals_path, class: "btn btn-primary btn-lg" %>
+    </center>
+  </div>
+
+  <div class="col-sm-4">
+    <center>
+    <h3>蔵書一覧</h3>
+    <%= link_to "蔵書一覧", books_path, class: "btn btn-primary btn-lg" %>
+    </center>
+  </div>
+</div>
+
+<br>
+<hr>
+
+<h2>あなたが借りている本</h2>
+<p>詳細は上のメニューから見てください。</p>
+
+<% if @rentals.any? %>
+<table class="table table-bordered table-hover">
+  <thead>
+     <tr class="info"><th>#</th><th>タイトル</th><th>貸出日時</th></tr>
+  </thead>
+  <tbody>
+    <% @rentals.each_with_index do |r, i| %>
+    <tr>
+    <td><%= i+1 %></td>
+    <td><%= r.Book.title %></td>
+    <td><%= r.rental_date.in_time_zone('Tokyo') %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <h4>借りている本はありません。</h4>
+<% end %>
