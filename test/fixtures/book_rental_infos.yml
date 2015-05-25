@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rental_count: 1
+  last_rental_id: 1
+  last_rental_name: MyString
+  now_rental_id: 1
+  now_rental_name: MyString
+  Book_id: 
+
+two:
+  rental_count: 1
+  last_rental_id: 1
+  last_rental_name: MyString
+  now_rental_id: 1
+  now_rental_name: MyString
+  Book_id: 

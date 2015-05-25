@@ -11,7 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525142600) do
+ActiveRecord::Schema.define(version: 20150525145127) do
+
+  create_table "book_rental_infos", force: :cascade do |t|
+    t.integer  "rental_count"
+    t.integer  "last_rental_id"
+    t.string   "last_rental_name"
+    t.integer  "now_rental_id"
+    t.string   "now_rental_name"
+    t.integer  "Book_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "book_rental_infos", ["Book_id"], name: "index_book_rental_infos_on_Book_id"
+
+  create_table "books", force: :cascade do |t|
+    t.string   "title"
+    t.string   "author"
+    t.string   "manufacturer"
+    t.datetime "publication_date"
+    t.string   "isbn"
+    t.string   "code"
+    t.binary   "image"
+    t.integer  "Rental_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "books", ["Rental_id"], name: "index_books_on_Rental_id"
+
+  create_table "rentals", force: :cascade do |t|
+    t.datetime "rental_date"
+    t.datetime "return_date"
+    t.string   "user_name"
+    t.integer  "User_id"
+    t.integer  "Book_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "rentals", ["Book_id"], name: "index_rentals_on_Book_id"
+  add_index "rentals", ["User_id"], name: "index_rentals_on_User_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
