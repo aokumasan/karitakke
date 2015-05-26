@@ -1,0 +1,54 @@
+<h1>蔵書一覧</h1>
+
+<hr>
+
+<% if can? :create, Book %>
+  <%= link_to "本の追加", new_book_path, :class => "btn btn-primary" %><br>
+<hr>
+<% end %>
+
+
+<div class="well">
+<h4><b>書籍検索</b></h4>
+<%= search_form_for @search do |f| %>
+  <%= f.label :title_cont, 'タイトル' %>
+  <%= f.text_field :title_cont %>
+  <%= button_tag( :class => "btn btn-warning") do %>
+    <i class="glyphicon glyphicon-search"></i> 検索
+  <% end %>
+<% end %>
+</div>
+
+<br>
+
+<% if @books.any? %>
+<table class="table table-bordered table-hover">
+  <thead>
+     <tr class="info"><th>ID</th><th>Titile</th><th>Author</th><th>Manufacture</th><th>Release</th><th>Operation</th></tr>
+  </thead>
+  <tbody>
+    <% @books.each do |b| %>
+    <tr>
+    <td><%= b.id %></td>
+    <td><%= b.title %></td>
+    <td><%= b.author %></td>
+    <td><%= b.manufacturer %></td>
+    <td><%= b.publication_date %></td>
+    <td width="230" align="center">
+      <div class="btn-group">
+        <%= link_to 'Show', book_path(b.id), class: "btn btn-info" %>
+        <% if can? :update, Book %>
+        <%= link_to 'Edit', edit_book_path(b.id), class: "btn btn-success" %>
+        <% end %>
+        <% if can? :destroy, Book %>
+        <%= link_to 'Destroy', book_path(b.id), method: :delete, data: { confirm: "削除してもよろしいですか？" }, :class => "btn btn-danger" %>
+        <% end %>
+      </div>
+    </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <h4>No data yet.</h4>
+<% end %>

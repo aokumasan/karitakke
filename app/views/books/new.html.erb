@@ -1,0 +1,13 @@
+<h1>本の追加</h1>
+
+<%= bootstrap_form_for(@book) do |f| %>
+  <%= f.text_field :isbn, autofocus: true %>
+  <input class="btn btn-danger" type="button" id="info_search_button" value="検索">
+  <hr>
+  <%= f.text_field :title %>
+  <%= f.text_field :author %>
+  <%= f.text_field :manufacturer %>
+  <%= f.text_field :publication_date %>
+  <%= f.text_field :code %>
+  <%= f.primary "本を追加" %>
+<% end %>
