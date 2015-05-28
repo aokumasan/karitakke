@@ -50,3 +50,6 @@ gem 'cancancan'
 gem 'devise-bootstrap-views', :git => 'git://github.com/hisea/devise-bootstrap-views.git'
 gem 'ransack'
 gem 'bootstrap_form'
+gem 'amazon-ecs'
+
+gem 'inifile'

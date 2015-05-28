@@ -45,7 +45,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <% if user_signed_in? and current_user.role == "admin" %>
+        <% if user_signed_in? and current_user.role != "member" %>
         <a class="navbar-brand" href="#">図書管理システム Karitakke<sup>for admin</sup></a>
         <% else %>
         <a class="navbar-brand" href="#">図書管理システム Karitakke</a>
@@ -55,9 +55,6 @@
             <li><%= link_to "Home", root_path %></li>
             <li><%= link_to "貸出図書一覧", rentals_path  %></li>
             <li><%= link_to "蔵書一覧", books_path  %></li>
-            <% if can? :manage, User %>
-            <li><%= link_to "ユーザ管理", users_path  %></li>
-            <% end %>
           </ul>
           <% if user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
@@ -77,25 +74,26 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-9">
-          <%= bootstrap_flash %>
-          <%= yield %>
-        </div>
         <div class="col-lg-3">
           <div class="well sidebar-nav">
             <h3>Sidebar</h3>
             <ul class="nav nav-list">
               <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
+              <li><%= link_to "貸出", new_rental_path %></li>
+              <li><%= link_to "返却", "/rentals/return"  %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
+
+        <div class="col-lg-9">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2015</p>
+        <p>&copy; Oeda Laboratory 2015</p>
       </footer>
 
     </div> <!-- /container -->

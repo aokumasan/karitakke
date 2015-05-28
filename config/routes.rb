@@ -3,8 +3,14 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :books
-  resources :rentals
-#  resources :users
+  resources :rentals, :only => [:index, :new, :create]
+  resources :users, :only => [:index, :edit, :update]
+
+  get 'search_book', to: 'rentals#search_book', path: "/rentals/new/search_book"
+  get 'get_info', to: 'books#get_info', path: "/books/new/get_info"
+  get 'return', to: 'rentals#pre_return', path: "/rentals/return"
+  get 'search_book', to: 'rentals#search_book', path: "/rentals/return/search_book"
+  post 'rentals', to: 'rentals#post_return', path: "/rentals/return"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

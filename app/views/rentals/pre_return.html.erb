@@ -1,0 +1,13 @@
+<h1>本の返却</h1>
+
+<%= bootstrap_form_for(@book, :url => "/rentals/return") do |f| %>
+  <%= f.text_field :code, autofocus: true %>
+  <input class="btn btn-danger" type="button" id="search_button", value="検索">
+  <b id="error_msg">  </b>
+  <hr>
+  <%= f.text_field :title, :readonly => true %>
+  <%= f.text_field :author, :readonly => true %>
+  <%= f.text_field :manufacturer, :readonly => true %>
+  <%= f.text_field :id, :readonly => true %>
+  <%= f.primary "返却", id: "return_button", disabled: "disabled" %>
+<% end %>

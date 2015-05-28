@@ -1,5 +1,5 @@
 class Book < ActiveRecord::Base
-  has_one :rental
+  belongs_to :rental
   has_one :book_rental_info
 
   # バリデーション 以下の項目は空欄ではいけない

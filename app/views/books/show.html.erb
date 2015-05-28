@@ -20,5 +20,14 @@
     <tr>
     <td width="100", class="info">管理番号</td> <td><%= @book.code %></td>
     </tr>
+    <tr>
+    <td width="100", class="info">貸出回数</td> <td><%= @book.book_rental_info.rental_count %></td>
+    </tr>
+    <tr>
+    <td width="100", class="info">貸出状態</td> <td>未貸出</td>
+    </tr>
+    <tr>
+    <td width="100", class="info">借りてる人</td> <td><%= @book.book_rental_info.now_rental_name %></td>
+    </tr>
   </tbody>
 </table>

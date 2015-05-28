@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'inifile'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -22,5 +23,31 @@ module Karitakke
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+
+    def _get(inifile, section, name)
+      begin
+        return inifile[section][name]
+      rescue => e
+        return "error: could not read #{name}"
+      end
+    end
+
+    keys = ['your_tag', 'your_key_id', 'your_key'] # 格納先
+    keyfile = "config/secret_key.dat" # 外部ファイル名
+
+    if File.exist?(keyfile) then
+      inifile = IniFile.load(keyfile)
+      keys[0] = _get(inifile, "amazon", 'associate_tag')
+      keys[1] = _get(inifile, "amazon", 'AWS_access_key_id')
+      keys[2] = _get(inifile, "amazon", 'AWS_secret_key')
+    end
+
+    Amazon::Ecs.options = {
+      :associate_tag =>     keys[0],
+      :AWS_access_key_id => keys[1],
+      :AWS_secret_key =>    keys[2]
+    }
+
   end
 end

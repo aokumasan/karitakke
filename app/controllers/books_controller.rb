@@ -37,6 +37,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
+      @book_info = BookRentalInfo.create(rental_count: 0, Book_id: @book.id)
       redirect_to books_path
     else
       render 'new'
@@ -65,7 +66,7 @@ class BooksController < ApplicationController
 
   private
     def book_params
-        params[:book].permit(:title, :author, :manufacturer, :publication_date, :isbn, :book_code)
+        params[:book].permit(:title, :author, :manufacturer, :publication_date, :isbn, :code)
     end
 
     def set_book

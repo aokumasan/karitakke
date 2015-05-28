@@ -2,10 +2,6 @@
 
 <hr>
 
-<%= link_to "本の貸出", new_rental_path, class: "btn btn-primary" %>
-
-<hr>
-
 <% if @rentals.any? %>
 <table class="table table-bordered table-hover">
   <thead>
@@ -15,15 +11,12 @@
     <% @rentals.each_with_index do |r, i| %>
     <tr>
     <td><%= i+1 %></td>
-    <td><%= r.Book.title %></td>
+    <td><%= r.book.title %></td>
     <td><%= r.rental_date.in_time_zone('Tokyo') %></td>
-    <td width="100" align="center">
-      <%= link_to '返却', rental_path(r.id), method: :delete, data: { confirm: "この本を返却します。よろしいですか？" }, :class => "btn btn-danger" %>
-    </td>
     </tr>
     <% end %>
   </tbody>
 </table>
 <% else %>
-  <h4>No data yet.</h4>
+  <h4>貸出中の本はありません。</h4>
 <% end %>

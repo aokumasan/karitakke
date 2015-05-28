@@ -4,7 +4,7 @@ class CreateBooks < ActiveRecord::Migration
       t.string :title
       t.string :author
       t.string :manufacturer
-      t.datetime :publication_date
+      t.date :publication_date
       t.string :isbn
       t.string :code
       t.binary :image
