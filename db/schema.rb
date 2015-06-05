@@ -33,7 +33,8 @@ ActiveRecord::Schema.define(version: 20150525145127) do
     t.date     "publication_date"
     t.string   "isbn"
     t.string   "code"
-    t.binary   "image"
+    t.string   "limage"
+    t.string   "simage"
     t.integer  "Rental_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false

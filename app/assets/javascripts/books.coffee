@@ -25,6 +25,7 @@ $(document).on 'ready page:load', -> # turbolinks対策
           $("#book_author").val(data.Author) # 県名index更新
           $("#book_manufacturer").val(data.Manufacturer) # 県名index更新
           $("#book_publication_date").val(data.Publication_Date) # 県名index更新
+          $("#image-box").children("img").attr({'src':data.S_Image})
         else                                     # 対象なし
           $("#postalcode-result").css("color","#ff0000").html("未登録の郵便番号
 です。")

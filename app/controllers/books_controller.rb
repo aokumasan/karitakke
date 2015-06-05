@@ -1,3 +1,5 @@
+require 'json'
+
 class BooksController < ApplicationController
 
 #  load_and_authorize_resource
@@ -15,9 +17,12 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
-  def get_info
+  def get_info(isbn=nil)
+    if isbn.nil?
+      isbn = params[:isbn]
+    end
     Amazon::Ecs.debug = true
-    res = Amazon::Ecs.item_search(params[:isbn],
+    res = Amazon::Ecs.item_search(isbn,
          :search_index   => 'Books',
          :response_group => 'Medium',
          :country        => 'jp'
@@ -25,10 +30,13 @@ class BooksController < ApplicationController
     if res.nil?
       info = nil
     else
+      print isbn
       info = {'Title' => res.first_item.get('ItemAttributes/Title'),
             'Author' => res.first_item.get('ItemAttributes/Author'),
             'Manufacturer' => res.first_item.get('ItemAttributes/Manufacturer'),
-            'Publication_Date' => res.first_item.get('ItemAttributes/PublicationDate')
+            'Publication_Date' => res.first_item.get('ItemAttributes/PublicationDate'),
+            'S_Image' => res.first_item.get('MediumImage/URL'),
+            'L_Image' => res.first_item.get('LargeImage/URL')
               }
     end
     render json: info
