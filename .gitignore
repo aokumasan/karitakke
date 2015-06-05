@@ -18,3 +18,4 @@
 
 .DS_Store
 config/secret_key.dat
+*~
