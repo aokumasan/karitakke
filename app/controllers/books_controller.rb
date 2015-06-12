@@ -17,20 +17,18 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
-  def get_info(isbn=nil)
-    if isbn.nil?
-      isbn = params[:isbn]
-    end
+  def get_info
+
     Amazon::Ecs.debug = true
-    res = Amazon::Ecs.item_search(isbn,
+    res = Amazon::Ecs.item_search(params[:isbn],
          :search_index   => 'Books',
          :response_group => 'Medium',
          :country        => 'jp'
        )
+
     if res.nil?
       info = nil
     else
-      print isbn
       info = {'Title' => res.first_item.get('ItemAttributes/Title'),
             'Author' => res.first_item.get('ItemAttributes/Author'),
             'Manufacturer' => res.first_item.get('ItemAttributes/Manufacturer'),
@@ -74,7 +72,7 @@ class BooksController < ApplicationController
 
   private
     def book_params
-        params[:book].permit(:title, :author, :manufacturer, :publication_date, :isbn, :code)
+        params[:book].permit(:title, :author, :manufacturer, :publication_date, :isbn, :code, :limage)
     end
 
     def set_book

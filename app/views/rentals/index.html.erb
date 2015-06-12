@@ -5,7 +5,7 @@
 <% if @rentals.any? %>
 <table class="table table-bordered table-hover">
   <thead>
-     <tr class="info"><th>#</th><th>タイトル</th><th>貸出日時</th></tr>
+     <tr class="info"><th>#</th><th>タイトル</th><th>貸出日時</th><th>イメージ</th></tr>
   </thead>
   <tbody>
     <% @rentals.each_with_index do |r, i| %>
@@ -13,6 +13,7 @@
     <td><%= i+1 %></td>
     <td><%= r.book.title %></td>
     <td><%= r.rental_date.in_time_zone('Tokyo') %></td>
+    <td><%= image_tag r.book.limage %></td>
     </tr>
     <% end %>
   </tbody>
