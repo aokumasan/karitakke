@@ -55,6 +55,9 @@
             <li><%= link_to "Home", root_path %></li>
             <li><%= link_to "貸出図書一覧", rentals_path  %></li>
             <li><%= link_to "蔵書一覧", books_path  %></li>
+            <% if can? :read, User%>
+              <li><%= link_to "登録ユーザー管理", users_path  %></li>
+            <% end %>
           </ul>
           <% if user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
