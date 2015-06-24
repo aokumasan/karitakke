@@ -37,6 +37,7 @@ class Ability
       can :manage, :all
     else
       can :update, User
+      can :read, Book
     end
   end
 end
