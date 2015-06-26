@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :books
   resources :rentals, :only => [:index, :new, :create]
   resources :users, :only => [:index, :edit, :update]
+  resources :logs
 
   get 'search_book', to: 'rentals#search_book', path: "/rentals/new/search_book"
   get 'get_info', to: 'books#get_info', path: "/books/new/get_info"
