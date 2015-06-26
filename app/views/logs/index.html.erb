@@ -2,15 +2,28 @@
 
 <hr>
 
+
+<% if @logs.any? %>
 <table class="table table-bordered table-hover">
   <thead>
-     <tr class="info"><th>id</th><th>名前</th></tr>
+     <tr class="info"><th>id</th><th>タイトル</th><th>誰が</th><th>貸出日時</th><th>返却日時</th></tr>
   </thead>
   <tbody>
     <% @logs.each do |l| %>
     <tr>
     <td><%= l.id %></td>
+    <td><%= Book.find(l.Book_id).title %></td>
+    <td><%= User.find(l.User_id).name %></td>
+    <td><%= l.rental_date.in_time_zone('Tokyo') %></td>
+    <% if l.return_date.nil? %>
+      <td>未返却</td>
+    <% else %>
+      <td><%= l.return_date.in_time_zone('Tokyo') %></td>
+    <% end %>
     </tr>
     <% end %>
   </tbody>
 </table>
+<% else %>
+  <h4>ログはありません。</h4>
+<% end %>
