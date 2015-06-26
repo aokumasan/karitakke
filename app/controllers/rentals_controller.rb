@@ -53,10 +53,6 @@ class RentalsController < ApplicationController
   end
 
   def destroy
-    @rental = current_user.Rentals.find(params[:id])
-    @rental.Book.update(Rental_id: nil)
-    @rental.destroy
-    redirect_to rentals_path
   end
 
   def pre_return
@@ -82,7 +78,7 @@ class RentalsController < ApplicationController
         render 'pre_return'
       end
     else
-      redirect_to "/rentals/return", notice: "その本はすでに返却済み。"
+      redirect_to "/rentals/return", notice: "その本はすでに返却済みです。"
     end
   end
 
