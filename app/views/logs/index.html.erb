@@ -1,0 +1,16 @@
+<h1貸出ログ</h1>
+
+<hr>
+
+<table class="table table-bordered table-hover">
+  <thead>
+     <tr class="info"><th>id</th><th>名前</th></tr>
+  </thead>
+  <tbody>
+    <% @logs.each do |l| %>
+    <tr>
+    <td><%= l.id %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
