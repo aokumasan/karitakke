@@ -4,13 +4,19 @@
 
 <table class="table table-bordered table-hover">
   <thead>
-     <tr class="info"><th>id</th><th>名前</th></tr>
+     <tr class="info"><th>id</th><th>名前</th><th>権限</th><th>操作</th></tr>
   </thead>
   <tbody>
     <% @users.each do |u| %>
     <tr>
     <td><%= u.id %></td>
     <td><%= u.name %></td>
+    <td><%= u.role %></td>
+    <td>
+    <%= link_to user_path(u.id) do %>
+      <i class="glyphicon glyphicon-info-sign", size="10"></i>
+    <% end %>
+    </td>
     </tr>
     <% end %>
   </tbody>

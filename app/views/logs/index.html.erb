@@ -13,7 +13,7 @@
     <tr>
     <td><%= l.id %></td>
     <td><%= Book.find(l.Book_id).title %></td>
-    <td><%= User.find(l.User_id).name %></td>
+    <td><%= l.user_name %></td>
     <td><%= l.rental_date.in_time_zone('Tokyo') %></td>
     <% if l.return_date.nil? %>
       <td>未返却</td>

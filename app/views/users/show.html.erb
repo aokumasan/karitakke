@@ -1,0 +1,23 @@
+<h1>ユーザー情報詳細</h1>
+
+<hr>
+
+
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+    <td width="100", class="info">id</td> <td><%= @user.id %></td>
+    </tr>
+    <tr>
+    <td width="100", class="info">名前</td> <td><%= @user.name %></td>
+    </tr>
+    <tr>
+    <td width="100", class="info">メールアドレス</td> <td><%= @user.email %></td>
+    </tr>
+    <tr>
+    <td width="100", class="info">最終ログイン</td> <td><%= @user.current_sign_in_at.in_time_zone('Tokyo') %></td>
+    </tr>
+    <tr>
+    <td width="100", class="info">ログイン回数</td> <td><%= @user.sign_in_count %></td>
+  </tbody>
+</table>

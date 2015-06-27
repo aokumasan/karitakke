@@ -31,7 +31,7 @@ class RentalsController < ApplicationController
   def create
     @book = Book.find(params[:book].require(:id))
     if @book.Rental_id.nil?
-      @rental = Rental.new(rental_date: DateTime.now)
+      @rental = Rental.new(rental_date: DateTime.now, user_name: current_user.name)
       @rental.User_id = current_user.id
       @rental.Book_id = @book.id
       if @rental.save
