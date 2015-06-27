@@ -33,8 +33,8 @@ class Ability
     if user.super_admin?
       can :manage, :all
     elsif user.admin?
-      cannot :read, User
       can :manage, :all
+      cannot :read, User
     else
       can :update, User
       can :read, Book

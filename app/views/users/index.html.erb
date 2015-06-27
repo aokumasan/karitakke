@@ -14,7 +14,10 @@
     <td><%= u.role %></td>
     <td>
     <%= link_to user_path(u.id) do %>
-      <i class="glyphicon glyphicon-info-sign", size="10"></i>
+      <i class="glyphicon glyphicon-info-sign"></i>
+    <% end %>
+    <%= link_to edit_user_path(u.id) do %>
+      <i class="glyphicon glyphicon-edit"></i>
     <% end %>
     </td>
     </tr>
