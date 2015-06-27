@@ -35,6 +35,7 @@ class Ability
     elsif user.admin?
       can :manage, :all
       cannot :read, User
+      cannot :read, Rental
     else
       can :update, User
       can :read, Book
