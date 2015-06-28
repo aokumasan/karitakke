@@ -2,12 +2,6 @@
 
 <hr>
 
-<% if can? :create, Book %>
-  <%= link_to "本の追加", new_book_path, :class => "btn btn-primary" %><br>
-<hr>
-<% end %>
-
-
 <div class="well">
 <h4><b>書籍検索</b></h4>
 <%= search_form_for @search do |f| %>
@@ -22,9 +16,26 @@
 <br>
 
 <% if @books.any? %>
-<table class="table table-bordered table-hover">
+<table class="table table-hover">
   <thead>
-     <tr class="info"><th>ID</th><th>Titile</th><th>Author</th><th>Manufacture</th><th>Release</th><th>Operation</th></tr>
+     <tr class="info">
+       <th>ID</th>
+      <th>タイトル</th>
+      <th>著者</th>
+      <th>出版社</th>
+      <th>発売日</th>
+        <% if can? :create, Book %>
+        <th>
+          <div align="right">
+          <%= link_to new_book_path, :class => "btn btn-primary" do %>
+          <i class="glyphicon glyphicon-plus"></i>
+          <% end %>
+          </div>
+        </th>
+      <% else %>
+        <th>情報</th>
+      <% end %>
+    </tr>
   </thead>
   <tbody>
     <% @books.each do |b| %>
@@ -34,7 +45,7 @@
     <td><%= b.author %></td>
     <td><%= b.manufacturer %></td>
     <td><%= b.publication_date %></td>
-    <td width="230" align="center">
+    <td align="right">
         <%= link_to book_path(b.id), class: "btn btn-info" do %>
           <i class="glyphicon glyphicon-info-sign"></i>
         <% end %>
@@ -56,5 +67,5 @@
   </tbody>
 </table>
 <% else %>
-  <h4>No data yet.</h4>
+  <h4>本がありません。</h4>
 <% end %>
