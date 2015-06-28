@@ -13,7 +13,7 @@
 <%= search_form_for @search do |f| %>
   <%= f.label :title_cont, 'タイトル' %>
   <%= f.text_field :title_cont %>
-  <%= button_tag( :class => "btn btn-warning") do %>
+  <%= button_tag( :class => "btn btn-success") do %>
     <i class="glyphicon glyphicon-search"></i> 検索
   <% end %>
 <% end %>
@@ -35,13 +35,12 @@
     <td><%= b.manufacturer %></td>
     <td><%= b.publication_date %></td>
     <td width="230" align="center">
-      <div class="btn-group">
         <%= link_to book_path(b.id), class: "btn btn-info" do %>
           <i class="glyphicon glyphicon-info-sign"></i>
         <% end %>
 
         <% if can? :update, Book %>
-          <%= link_to edit_book_path(b.id), class: "btn btn-success" do %>
+          <%= link_to edit_book_path(b.id), class: "btn btn-warning" do %>
             <i class="glyphicon glyphicon-edit"></i>
           <% end %>
         <% end %>
@@ -51,7 +50,6 @@
             <i class="glyphicon glyphicon-remove-circle"></i>
           <% end %>
         <% end %>
-      </div>
     </td>
     </tr>
     <% end %>
