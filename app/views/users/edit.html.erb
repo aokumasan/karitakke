@@ -2,7 +2,11 @@
 
 <hr>
 
+<% if ! @user.super_admin? %>
 <%= bootstrap_form_for(@user) do |f| %>
   <%= f.select :role, {"管理者" => "admin", "一般ユーザー" => "member"} %>
   <%= f.primary "確定" %>
+<% end %>
+<% else %>
+  <p>super_adminユーザーは権限を変更できません。</p>
 <% end %>
