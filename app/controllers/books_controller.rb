@@ -5,7 +5,7 @@ class BooksController < ApplicationController
 
   def index
     @search = Book.search(params[:q])
-    @books = @search.result
+    @books = @search.result.page(params[:page])
   end
 
   def show
