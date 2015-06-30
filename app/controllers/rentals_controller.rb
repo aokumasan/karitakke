@@ -3,7 +3,7 @@ class RentalsController < ApplicationController
 #  load_and_authorize_resource
 
   def index
-    @rentals = current_user.rentals.where(return_date: nil)
+    @rentals = current_user.rentals.where(is_returned: false)
   end
 
   def new
@@ -30,19 +30,16 @@ class RentalsController < ApplicationController
 
   def create
     @book = Book.find(params[:book].require(:id))
-    if @book.Rental_id.nil?
-      @rental = Rental.new(rental_date: DateTime.now, user_name: current_user.name)
-      @rental.User_id = current_user.id
-      @rental.Book_id = @book.id
+    if @book.book_rental_info.is_rentaled == false
+      @rental = current_user.rentals.new(rental_date: DateTime.now, user_name: current_user.name)
+      @rental.book_id = @book.id
       if @rental.save
-        @bookinfo = BookRentalInfo.new
-        @bookinfo.Book_id = @book.id
+        @bookinfo = @book.book_rental_info
+        @bookinfo.is_rentaled = true
         @bookinfo.now_rental_id = current_user.id
         @bookinfo.now_rental_name = current_user.name
         @bookinfo.increment(:rental_count)
-        @book.Rental_id = @rental.id
         @bookinfo.save
-        @book.save
         redirect_to rentals_path
       else
         render 'new'
@@ -61,10 +58,12 @@ class RentalsController < ApplicationController
 
   def post_return
     @book = Book.find(params[:book].require(:id))
-    if not @book.Rental_id.nil?
-      @rental = Rental.find(@book.Rental_id)
-      @book.Rental_id = nil
+    puts @book.title
+    if @book.book_rental_info.is_rentaled == true
+      @rental = @book.rentals.where(user_id: current_user.id).where(is_returned: false).first
+      @book.book_rental_info.is_rentaled = false
       @rental.return_date = DateTime.now
+      @rental.is_returned = true
       if @rental.save
         @bookinfo = @book.book_rental_info
         @bookinfo.last_rental_id = current_user.id
@@ -72,7 +71,6 @@ class RentalsController < ApplicationController
         @bookinfo.now_rental_id = nil
         @bookinfo.now_rental_name = nil
         @bookinfo.save
-        @book.save
         redirect_to rentals_path
       else
         render 'pre_return'

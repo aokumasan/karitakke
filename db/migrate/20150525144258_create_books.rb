@@ -7,9 +7,8 @@ class CreateBooks < ActiveRecord::Migration
       t.date :publication_date
       t.string :isbn
       t.string :code
-      t.string :limage
-      t.string :simage
-      t.references :Rental, index: true, foreign_key: true
+      t.string :image_url
+      t.binary :image
 
       t.timestamps null: false
     end

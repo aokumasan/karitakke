@@ -13,7 +13,7 @@
     <td><%= i+1 %></td>
     <td><%= r.book.title %></td>
     <td><%= r.rental_date.in_time_zone('Tokyo') %></td>
-    <td><%= image_tag r.book.limage %></td>
+    <td><%= image_tag r.book.image_url %></td>
     </tr>
     <% end %>
   </tbody>

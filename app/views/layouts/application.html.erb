@@ -56,8 +56,12 @@
               <li>
                 <%= link_to rentals_path do %>
                 借りている本
-                <span class="badge"><%= current_user.rentals.where("return_date = ?", nil).count %></span>
+                <% if user_signed_in? %>
+                <span class="badge">
+                <%= current_user.rentals.where("is_returned = ?", false).count %>
+                </span>
                 <% end %>
+                <% end %> 
               </li>
               <li><%= link_to "蔵書一覧", books_path  %></li>
               <% if can? :read, User%>

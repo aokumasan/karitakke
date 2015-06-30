@@ -15,7 +15,6 @@
 
 <br>
 
-<% if @books.any? %>
 <table class="table table-hover">
   <thead>
      <tr class="info">
@@ -37,6 +36,7 @@
       <% end %>
     </tr>
   </thead>
+  <% if @books.any? %>
   <tbody>
     <% @books.each do |b| %>
     <tr>
@@ -65,7 +65,5 @@
     </tr>
     <% end %>
   </tbody>
+  <% end %>
 </table>
-<% else %>
-  <h4>本がありません。</h4>
-<% end %>

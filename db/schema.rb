@@ -14,17 +14,18 @@
 ActiveRecord::Schema.define(version: 20150525145127) do
 
   create_table "book_rental_infos", force: :cascade do |t|
-    t.integer  "rental_count"
+    t.integer  "rental_count",     default: 0
+    t.boolean  "is_rentaled",      default: false
     t.integer  "last_rental_id"
     t.string   "last_rental_name"
     t.integer  "now_rental_id"
     t.string   "now_rental_name"
-    t.integer  "Book_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.integer  "book_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
-  add_index "book_rental_infos", ["Book_id"], name: "index_book_rental_infos_on_Book_id"
+  add_index "book_rental_infos", ["book_id"], name: "index_book_rental_infos_on_book_id"
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -33,27 +34,25 @@ ActiveRecord::Schema.define(version: 20150525145127) do
     t.date     "publication_date"
     t.string   "isbn"
     t.string   "code"
-    t.string   "limage"
-    t.string   "simage"
-    t.integer  "Rental_id"
+    t.string   "image_url"
+    t.binary   "image"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
 
-  add_index "books", ["Rental_id"], name: "index_books_on_Rental_id"
-
   create_table "rentals", force: :cascade do |t|
     t.datetime "rental_date"
     t.datetime "return_date"
+    t.boolean  "is_returned", default: false
     t.string   "user_name"
-    t.integer  "User_id"
-    t.integer  "Book_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  add_index "rentals", ["Book_id"], name: "index_rentals_on_Book_id"
-  add_index "rentals", ["User_id"], name: "index_rentals_on_User_id"
+  add_index "rentals", ["book_id"], name: "index_rentals_on_book_id"
+  add_index "rentals", ["user_id"], name: "index_rentals_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",       null: false

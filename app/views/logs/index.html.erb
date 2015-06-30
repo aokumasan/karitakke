@@ -6,16 +6,23 @@
 <% if @logs.any? %>
 <table class="table table-bordered table-hover">
   <thead>
-     <tr class="info"><th>id</th><th>タイトル</th><th>誰が</th><th>貸出日時</th><th>返却日時</th></tr>
+     <tr class="info"><th>id</th><th>タイトル</th><th>ユーザー</th><th>返却状態</th><th>貸出日時</th><th>返却日時</th></tr>
   </thead>
   <tbody>
     <% @logs.each do |l| %>
     <tr>
     <td><%= l.id %></td>
-    <td><%= Book.find(l.Book_id).title %></td>
-    <td><%= l.user_name %></td>
+    <td><%= l.book.title %></td>
+    <td><%= l.user.name %></td>
+    <td>
+    <% if l.is_returned == false %>
+      未返却
+    <% else %>
+      返却済み
+    <% end %>  
+    </td>
     <td><%= l.rental_date.in_time_zone('Tokyo') %></td>
-    <% if l.return_date.nil? %>
+    <% if l.is_returned == false %>
       <td>未返却</td>
     <% else %>
       <td><%= l.return_date.in_time_zone('Tokyo') %></td>

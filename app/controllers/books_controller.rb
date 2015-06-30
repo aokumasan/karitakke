@@ -17,7 +17,6 @@ class BooksController < ApplicationController
 
   def get_info
 
-    Amazon::Ecs.debug = true
     res = Amazon::Ecs.item_search(params[:isbn],
          :search_index   => 'Books',
          :response_group => 'Medium',
@@ -41,7 +40,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      @book_info = BookRentalInfo.create(rental_count: 0, Book_id: @book.id)
+      @book_info = BookRentalInfo.create(book_id: @book.id)
       redirect_to books_path
     else
       render 'new'
@@ -60,7 +59,7 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    if @book.Rental_id.nil?
+    if @book.book_rental_info.is_rentaled == false
       @book.destroy
       redirect_to books_path
     else
@@ -70,7 +69,7 @@ class BooksController < ApplicationController
 
   private
     def book_params
-        params[:book].permit(:title, :author, :manufacturer, :publication_date, :isbn, :code, :limage)
+        params[:book].permit(:title, :author, :manufacturer, :publication_date, :isbn, :code, :image_url)
     end
 
     def set_book
