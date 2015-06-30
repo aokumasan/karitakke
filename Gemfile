@@ -51,5 +51,5 @@ gem 'devise-bootstrap-views', :git => 'git://github.com/hisea/devise-bootstrap-v
 gem 'ransack'
 gem 'bootstrap_form'
 gem 'amazon-ecs'
-
+gem 'kaminari'
 gem 'inifile'
